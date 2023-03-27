@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         // реализуйте алгоритм здесь
         UserServiceImpl userService = new UserServiceImpl();
-        userService.cleanUsersTable();
+        userService.createUsersTable();
         userService.saveUser("Kolya", "Popkin", (byte) 52);
         userService.saveUser("Boris", "Britva", (byte) 41);
         userService.saveUser("Tony", "Poolya", (byte) 26);
