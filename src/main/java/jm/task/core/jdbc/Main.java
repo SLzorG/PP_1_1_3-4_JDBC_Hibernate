@@ -1,6 +1,10 @@
 package jm.task.core.jdbc;
 
+import com.mysql.cj.xdevapi.SessionFactory;
 import jm.task.core.jdbc.service.UserServiceImpl;
+
+import javax.security.auth.login.AppConfigurationEntry;
+import javax.security.auth.login.Configuration;
 
 public class Main {
     public static void main(String[] args) {
