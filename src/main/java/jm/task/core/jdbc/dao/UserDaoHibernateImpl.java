@@ -7,7 +7,6 @@ import org.hibernate.*;
 import java.util.List;
 
 public class UserDaoHibernateImpl implements UserDao {
-    SessionFactory sessionFactory = new Util().getSessionFactory();
 
     public UserDaoHibernateImpl() {
     }
@@ -40,13 +39,18 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void saveUser(String name, String lastName, byte age) {
+        Transaction transaction = null;
         try (Session session = Util.getSessionFactory().openSession()) {
-            Transaction transaction = session.beginTransaction();
+            transaction = session.beginTransaction();
             session.save(new User(name, lastName, age));
             System.out.println("User с именем –" + name + " добавлен в базу данных ");
             transaction.commit();
         } catch (HibernateException e) {
-            System.out.println("User не сохранён");
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            System.out.println("User: " + name + " - не сохранён");
+
         }
     }
 
